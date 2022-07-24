@@ -1,18 +1,15 @@
+from itertools import product as pro, combinations_with_replacement as com
+
+
 def exp_sum(num):
-
-    cache = {1: 1}
-
-    def sums(n):
-        adder = 0
-        for i in range(2, n):
-            if n // i - 1:
-                adder += n // i - 1
-
-        if n not in cache:
-            cache[n] = sums(n - 1) + adder + 1
-        return cache[n]
-
-    return sums(num)
+    ints = list(range(1, num))
+    sums = 1
+    for i in ints:
+        for j in com(ints, i):
+            if sum(j) == num:
+                # print(j)
+                sums += 1
+    return sums + 1 if num > 1 else 1
 
 
-print(exp_sum(10))
+print(exp_sum(6))
